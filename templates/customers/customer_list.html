@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Customers{% endblock %}
+{% block content %}
+<h2>Customers</h2>
+<p><a class="btn btn-primary" href="{% url 'customers:create' %}">+ Add Customer</a></p>
+<table class="table table-striped">
+  <thead><tr><th>ID</th><th>Name</th><th>Phone</th><th></th></tr></thead>
+  <tbody>
+    {% for c in customers %}
+    <tr>
+      <td>{{ c.id }}</td>
+      <td>{{ c.name }}</td>
+      <td>{{ c.phone }}</td>
+      <td>
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'customers:edit' c.pk %}">Edit</a>
+        <a class="btn btn-sm btn-outline-danger" href="{% url 'customers:delete' c.pk %}">Delete</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">No customers yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
